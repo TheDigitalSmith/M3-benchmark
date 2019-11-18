@@ -20,25 +20,30 @@
 
     <script src="script.js"></script>
 
-    <script> 
+    <!-- <script> 
     window.onload = async () => {
-      const films = await getCategory()
-      console.log("films", films)
-      const filmsDiv = document.querySelector("#films")
+      const category = await getCategories()
+      console.log("genre", category)
 
-      if (filmsDiv.length > 0){
-          filmsDiv.innerHTML = films.map (
-            event => `
-            <div>
-              <img src=""
-            </div>
-            `
-          )
-      } else {
-        filmsDiv.innerText = "No films available right now, Try again later"
-      }
+      category.forEach(async genre => {
+        let genres = await getFilms(genre)
+        console.log("films", genres)
+      });
+      // const filmsDiv = document.querySelector("#films")
+
+      // if (filmsDiv.length > 0){
+      //     filmsDiv.innerHTML = films.map (
+      //       event => `
+      //       <div>
+      //         <img src=""
+      //       </div>
+      //       `
+      //     )
+      // } else {
+      //   filmsDiv.innerText = "No films available right now, Try again later"
+      // }
     }
-    </script>
+    </script> -->
 
     <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

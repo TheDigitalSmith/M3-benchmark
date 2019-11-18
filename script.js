@@ -3,8 +3,31 @@ let passkey = "ykeZdCYNLs2dqbMc"
 let token = btoa(username + ":" + passkey)
 let entry = `Authorization: Basic ${token}`
 
+window.onload = async () => {
+    const category = await getCategories()
+    console.log("genre", category)
+
+    category.forEach(async genre => {
+      let genres = await getFilms(genre)
+      console.log("films", genres)
+    });
+    // const filmsDiv = document.querySelector("#films")
+
+    // if (filmsDiv.length > 0){
+    //     filmsDiv.innerHTML = films.map (
+    //       event => `
+    //       <div>
+    //         <img src=""
+    //       </div>
+    //       `
+    //     )
+    // } else {
+    //   filmsDiv.innerText = "No films available right now, Try again later"
+    // }
+  }
+
 //GET endpoint upon starting//
-getCategory = async() => {
+getCategories = async() => {
     let response = await fetch ("https://strive-school-testing-apis.herokuapp.com/api/movies/", {
         method:"GET",
         headers:{
@@ -15,27 +38,38 @@ getCategory = async() => {
 }
 
 //GET films from secondary endpoint
-getFilms= async(category) => {
-    let response = await fetch ("https://strive-school-testing-apis.herokuapp.com/api/movies/", {
-        method:"GET",
-        headers:{
-            "Authorization":"Basic "+ token
-        }
-    })
-    let jsonResponse = await response.json ()
 
-    jsonResponse.forEach(async category => {
-        let films = await fetch ("https://strive-school-testing-apis.herokuapp.com/api/movies/"+ category, {
+getFilms = async(category) => {
+    let response = await fetch ("https://strive-school-testing-apis.herokuapp.com/api/movies/" + category, {
         method:"GET",
         headers:{
             "Authorization":"Basic "+ token
         }
     })
-    let jsonFilms = await films.json()
-    console.log (jsonFilms)
-    return jsonFilms
-    });
+    return await response.json ()
 }
+
+// getFilms= async(category) => {
+//     let response = await fetch ("https://strive-school-testing-apis.herokuapp.com/api/movies/", {
+//         method:"GET",
+//         headers:{
+//             "Authorization":"Basic "+ token
+//         }
+//     })
+//     let jsonResponse = await response.json ()
+
+//     jsonResponse.forEach(async category => {
+//         let films = await fetch ("https://strive-school-testing-apis.herokuapp.com/api/movies/"+ category, {
+//         method:"GET",
+//         headers:{
+//             "Authorization":"Basic "+ token
+//         }
+//     })
+//     let jsonFilms = await films.json()
+//     console.log (jsonFilms)
+//     return jsonFilms
+//     });
+// }
 
 //POST TO ENTER DATA INTO THE API
 
